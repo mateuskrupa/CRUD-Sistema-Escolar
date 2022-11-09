@@ -32,6 +32,8 @@ export default function ConsProf () {
     }
 
 
+
+    
     const Consultar = () => {
         enviarCpf()
         setTimeout(() => {

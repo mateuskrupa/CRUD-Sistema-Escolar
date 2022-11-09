@@ -64,12 +64,49 @@ app.get("/consultar/professor", (req, res) => {
 
 //ATUALIZAR PROFESSOR
 app.post("/atualizar/professor", (req, res) => {
-    const {nome} = req.body;
-    const {cpf} = req.body;
-    const {ta} = req.body;
-    const {disciplina} = req.body;
+    let {nome} = req.body;
+    let {cpf} = req.body;
+    let {ta} = req.body;
+    let {disciplina} = req.body;
 
-    let sql = `UPDATE professor SET nome='${nome}', cpf='${cpf}', ta='${ta}', disciplina='${disciplina}' WHERE cpf='${cpf}'`
+    console.log(nome)
+    console.log(cpf)
+    console.log(ta)
+    console.log(disciplina)
+
+
+
+    if (nome === undefined) {
+        nome = ''
+        console.log(nome)
+    }else{
+        nome = `nome='${nome}',`
+    }
+
+    if (cpf === undefined) {
+        cpf = ''
+        console.log(cpf)
+    }else{
+        cpf = `cpf='${cpf}',`
+    }
+
+    if (ta === undefined) {
+        ta = ''
+        console.log(ta)
+    }else{
+        ta = `ta='${ta}',`
+    }
+
+    if (disciplina === undefined) {
+        disciplina = ''
+        console.log(disciplina)
+    }else{
+        disciplina = `disciplina='${disciplina}',`
+    }
+
+
+
+    let sql = `UPDATE professor SET ${nome} ${cpf} ${ta} ${disciplina} tipo='professor' WHERE cpf='${lcpf[0]}'`
 
     console.log(sql)
     db.query(sql, (err) => {
@@ -93,47 +130,6 @@ app.post("/deletar/professor", (req, res) => {
         return res.status(200).json("criado com sucesso")
     })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*db.connect()
-db.query("select * from postgres").then(results => {
-    const result = results
-    console.table(result)
-}).finally(() => {
-    db.end()
-})*/
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
