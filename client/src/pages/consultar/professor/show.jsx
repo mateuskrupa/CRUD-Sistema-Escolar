@@ -1,12 +1,13 @@
 import React from "react";
+import './show.css'
 
 export default function Show (props) {
     return(
-        <div className="container">
-            <h1>{props.nome}</h1>
-            <h1>{props.cpf}</h1>
-            <h1>{props.ta}</h1>
-            <h1>{props.disciplina}</h1>
+        <div id="show-container">
+            <p>Nome: {props.nome}</p>
+            <p>CPF: {props.cpf}</p>
+            <p>Título Acadêmico: {props.ta}</p>
+            <p>Disciplina: {props.disciplina}</p>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import Axios from 'axios'
+import './cad_prof.css'
 
 export default function Prof () {
 
@@ -25,14 +26,15 @@ export default function Prof () {
 
 
     return(
-        <div className="container">
-            
-                <input type="text" name="nome" placeholder="Nome" onChange={handleChangeValues}/>
-                <input type="text" name="cpf" placeholder="Cpf" onChange={handleChangeValues}/>
-                <input type="text" name="ta" placeholder="Titulo Academico" onChange={handleChangeValues}/>
-                <input type="text" name="disciplina" placeholder="Disciplina" onChange={handleChangeValues}/>
+        <div id="cad-prof-container">
+                <div id="cad-form">
+                    <input type="text" name="nome" placeholder="Nome" onChange={handleChangeValues}/>
+                    <input type="text" name="cpf" placeholder="Cpf" onChange={handleChangeValues}/>
+                    <input type="text" name="ta" placeholder="Titulo Academico" onChange={handleChangeValues}/>
+                    <input type="text" name="disciplina" placeholder="Disciplina" onChange={handleChangeValues}/>
 
-                <button onClick={() => clickButton()}>Submit</button>
+                    <button onClick={() => clickButton()}>Submit</button>
+                </div>
             
         </div>
     )

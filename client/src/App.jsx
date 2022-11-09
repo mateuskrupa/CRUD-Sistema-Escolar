@@ -6,6 +6,7 @@ import Atualizar from './pages/atualizar/atualizar'
 import Consultar from './pages/consultar/consultar'
 import Prof from './pages/cadastrar/professor/cad_prof'
 import ConsProf from './pages/consultar/professor/consProf'
+import Logo from './logo.png'
 
 function App() {
 
@@ -13,11 +14,19 @@ function App() {
 
   return (
     <Router>
-      <div className="container">
-        <h1>Escola zika</h1>
+      <div id="container">
+        <div id="topo">
+        <img src={Logo} alt="" />
+        <div id="dadose">
+        <h1>Escola IMPERADOR</h1>
+        <h4>CNPJ: 10.935.176/0001-99</h4>
+        <h4>Endereço: Rua das Laranjeiras 587 São Paulo-SP</h4>
+        </div>
+
+        </div>
         
-        <a href="/cadastrar">CADASTRAR</a>
-        <a href="/consultar">CONSULTAR / ATUALIZAR</a>
+        <a id="a" href="/cadastrar">CADASTRAR</a>
+        <a id="a" href="/consultar">CONSULTAR / ATUALIZAR</a>
       </div>
 
       <Switch>

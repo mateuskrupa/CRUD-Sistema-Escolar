@@ -1,0 +1,29 @@
+#cons-prof-container {
+    display: grid;
+    grid-template-columns: auto 20% auto;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#cpf, #form{
+    display: flex;
+    flex-direction: column;
+}
+
+#form {
+    width: 50vh;
+}
+
+#cpf {
+    width: 40vh;
+}
+
+#acbut {
+    display: flex;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+#cons {
+    margin-top: 5px;
+}

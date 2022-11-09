@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import Axios from 'axios'
 import Show from './show'
-import Form from './form'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import './consProf.css'
 
 export default function ConsProf () {
 
@@ -19,6 +18,8 @@ export default function ConsProf () {
         }))
     }
 
+
+    //temque dar um geito de quando clicar em atualizar e nao mudar nenhum valor, ele pegar o valor
     const clickButton = () => {
         Axios.post("http://localhost:8080/atualizar/professor", {
             nome: values.nome,
@@ -69,20 +70,28 @@ export default function ConsProf () {
 
 
     return(
-        <div className="container">
-                <input type="text" name="cpf" placeholder="Cpf" onChange={handleChangeValues} />
-                <button onClick={() => Consultar()}>Consultar</button>
+        <div id="cons-prof-container">
+                    <div id="cpf">
+                        <input type="text" name="cpf" placeholder="Cpf" onChange={(handleChangeValues)} />
+                        <button id="cons" onClick={() => Consultar()}>Consultar</button>
+                    </div>
 
-                <input type="text" name="nome" placeholder={nome} onChange={handleChangeValues} />
-                <input type="text" name="cpf" placeholder={cpf} onChange={handleChangeValues} />
-                <input type="text" name="ta" placeholder={ta} onChange={handleChangeValues}/>
-                <input type="text" name="disciplina" placeholder={disciplina} onChange={handleChangeValues}/>
+                    <Show nome={nome} cpf={cpf} ta={ta} disciplina={disciplina}/>
 
-                <button onClick={() => clickButton()}>Atualizar dados</button>
-                <button onClick={() => clickButtonDel()}>DELETAR</button>
+                    <div id="form">
+                        <input type="text" name="nome" placeholder="Nome" onChange={handleChangeValues} defaultValue={nome}/>
+                        <input type="text" name="cpf" placeholder="CPF" onChange={handleChangeValues} defaultValue={cpf}/>
+                        <input type="text" name="ta" placeholder="Título Academico" onChange={handleChangeValues} defaultValue={ta}/>
+                        <input type="text" name="disciplina" placeholder="Disciplina" onChange={handleChangeValues} defaultValue={disciplina}/>
 
-                <Show nome={nome} cpf={cpf} ta={ta} disciplina={disciplina}/>
+                        <div id="acbut">
+                            <button onClick={() => clickButton()}>ATUALIZAR</button>
+                            <button onClick={() => clickButtonDel()}>DELETAR</button>
+                        </div>   
+                    </div>
 
+                    
+                
                 
             
         </div>
