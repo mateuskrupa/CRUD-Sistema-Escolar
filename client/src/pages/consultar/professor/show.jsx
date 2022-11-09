@@ -6,8 +6,8 @@ export default function Show (props) {
         <div id="show-container">
             <p>Nome: {props.nome}</p>
             <p>CPF: {props.cpf}</p>
-            <p>Título Acadêmico: {props.ta}</p>
-            <p>Disciplina: {props.disciplina}</p>
+            <p>Título Academico {props.ta}</p>
+            <p>Disciplina: {props.disciplina}</p>          
         </div>
     )
 }

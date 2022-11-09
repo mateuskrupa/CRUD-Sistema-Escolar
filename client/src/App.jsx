@@ -4,9 +4,13 @@ import styles from './App.css'
 import Cadastrar from './pages/cadastrar/cadastrar'
 import Atualizar from './pages/atualizar/atualizar'
 import Consultar from './pages/consultar/consultar'
-import Prof from './pages/cadastrar/professor/cad_prof'
-import ConsProf from './pages/consultar/professor/consProf'
 import Logo from './logo.png'
+import Prof from './pages/cadastrar/professor/cad_prof'
+import Aluno from './pages/cadastrar/aluno/cad_aluno'
+import Boletim from './pages/cadastrar/boletim/cad_boletim'
+import ConsAluno from './pages/consultar/aluno/consAluno'
+import ConsProf from './pages/consultar/professor/consProf'
+
 
 function App() {
 
@@ -43,8 +47,20 @@ function App() {
           <Prof />
         </Route>
 
+        <Route exact path="/cadastrar/aluno">
+          <Aluno />
+        </Route>
+
+        <Route exact path="/cadastrar/boletim">
+          <Boletim />
+        </Route>
+
         <Route exact path="/consultar/professor">
           <ConsProf />
+        </Route>
+
+        <Route exact path="/consultar/aluno">
+          <ConsAluno />
         </Route>
 
 

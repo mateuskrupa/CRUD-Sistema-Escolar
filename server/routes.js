@@ -28,6 +28,40 @@ app.post("/cadastrar/professor", (req, res) => {
     })
 })
 
+//CADASTRAR NOVO ALUNO
+app.post("/cadastrar/aluno", (req, res) => {
+    const {nome} = req.body;
+    const {cpf} = req.body;
+    const {sala} = req.body;
+    const {modulo} = req.body;
+
+    let sql = `INSERT INTO aluno (nome, cpf, sala, modulo) VALUES ('${nome}', '${cpf}', '${sala}', '${modulo}')`
+
+
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
+//CADASTRAR NOVO BOLETIM
+app.post("/cadastrar/boletim", (req, res) => {
+    const {aluno} = req.body;
+    const {turma} = req.body;
+    const {nota_final} = req.body;
+
+    let sql = `INSERT INTO boletim (aluno, turma, nota_final) VALUES ('${aluno}', '${turma}', '${nota_final}')`
+
+
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
+
 //CONSULTAR PROFESSOR
 app.post("/consultar/professor", (req, res) => {
     let {cpf} = req.body;
@@ -49,6 +83,39 @@ app.get("/consultar/professor", (req, res) => {
     const cpf = lcpf[0]
 
     let sql = `SELECT * FROM professor WHERE cpf='${cpf}'`
+
+    console.log(sql)
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+
+    
+})
+
+//CONSULTAR ALUNO
+app.post("/consultar/aluno", (req, res) => {
+    let {cpf} = req.body;
+    console.log(cpf)
+
+    if(lcpf.length >= 1) {
+        lcpf.pop()
+        lcpf.push(cpf)
+        console.log(lcpf)
+    }else{
+        lcpf.push(cpf)
+        console.log(lcpf)  
+    }   
+
+})
+
+app.get("/consultar/aluno", (req, res) => {
+
+    const cpf = lcpf[0]
+
+    let sql = `SELECT * FROM aluno WHERE cpf='${cpf}'`
 
     console.log(sql)
 
@@ -116,12 +183,72 @@ app.post("/atualizar/professor", (req, res) => {
     })
 })
 
+//ATUALIZAR ALUNO
+app.post("/atualizar/aluno", (req, res) => {
+    let {nome} = req.body;
+    let {cpf} = req.body;
+    let {sala} = req.body;
+    let {modulo} = req.body;
+
+    if (nome === undefined) {
+        nome = ''
+        console.log(nome)
+    }else{
+        nome = `nome='${nome}',`
+    }
+
+    if (cpf === undefined) {
+        cpf = ''
+        console.log(cpf)
+    }else{
+        cpf = `cpf='${cpf}',`
+    }
+
+    if (sala === undefined) {
+        sala = ''
+
+    }else{
+        sala = `sala='${sala}',`
+    }
+
+    if (modulo === undefined) {
+        modulo = ''
+    }else{
+        modulo = `modulo='${modulo}',`
+    }
+
+
+
+    let sql = `UPDATE aluno SET ${nome} ${cpf} ${sala} ${modulo} tipo='aluno' WHERE cpf='${lcpf[0]}'`
+
+    console.log(sql)
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
 
 //DELETAR PROFESSOR
 app.post("/deletar/professor", (req, res) => {
     const {cpf} = req.body;
 
     let sql = `DELETE FROM professor WHERE cpf='${cpf}'`
+
+    console.log(sql)
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
+//DELETAR ALUNO
+app.post("/deletar/aluno", (req, res) => {
+    const {cpf} = req.body;
+
+    let sql = `DELETE FROM aluno WHERE cpf='${cpf}'`
 
     console.log(sql)
     db.query(sql, (err) => {

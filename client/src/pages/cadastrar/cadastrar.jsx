@@ -6,6 +6,8 @@ export default function Cadastrar () {
         <div className="container-2">
             <a id="a" href="/cadastrar/professor">PROFESSOR</a>
             <a id="a" href="/cadastrar/aluno">ALUNO</a>
+            <a id="a" href="/cadastrar/boletim">BOLETIM</a>
+            <a id="a" href="/cadastrar/turma">TURMA</a>
         </div>
     );
 }
