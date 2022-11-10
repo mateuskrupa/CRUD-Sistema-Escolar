@@ -352,6 +352,46 @@ app.post("/deletar/boletim", (req, res) => {
     })
 })
 
+//CONSULTAR PROFESSOR GERAL
+app.get("/consultar/geral/professor", (req, res) => {
+
+    const sql = `SELECT * FROM professor`
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+   
+})
+
+//CONSULTAR ALUNO GERAL
+app.get("/consultar/geral/aluno", (req, res) => {
+
+    const sql = `SELECT * FROM aluno`
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+   
+})
+
+//CONSULTAR BOLETIM GERAL
+app.get("/consultar/geral/boletim", (req, res) => {
+
+    const sql = `SELECT * FROM boletim`
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+   
+})
+
+
 
 
 

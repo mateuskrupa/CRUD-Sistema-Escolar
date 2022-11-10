@@ -19,7 +19,6 @@ export default function ConsProf () {
     }
 
 
-    //temque dar um geito de quando clicar em atualizar e nao mudar nenhum valor, ele pegar o valor
     const clickButton = () => {
         Axios.post("http://localhost:8080/atualizar/professor", {
             nome: values.nome,

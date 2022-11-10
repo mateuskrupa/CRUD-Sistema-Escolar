@@ -7,6 +7,10 @@ export default function CONSULTAR () {
             <a id="a" href="/consultar/aluno">ALUNO</a>
             <a id="a" href="/consultar/boletim">BOLETIM</a>
             <a id="a" href="/consultar/turma">TURMA</a>
+            <a id="a" href="/consultar/geral">CONSULTAR GERAL</a>
+
         </div>
+
+
     );
 }

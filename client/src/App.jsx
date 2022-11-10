@@ -11,6 +11,7 @@ import Boletim from './pages/cadastrar/boletim/cad_boletim'
 import ConsAluno from './pages/consultar/aluno/consAluno'
 import ConsProf from './pages/consultar/professor/consProf'
 import ConsBoletim from './pages/consultar/boletim/consBoletim'
+import ConsGeral from './pages/consultar/geral/consGeral'
 
 
 function App() {
@@ -66,6 +67,10 @@ function App() {
 
         <Route exact path="/consultar/boletim">
           <ConsBoletim />
+        </Route>
+
+        <Route exact path="/consultar/geral">
+          <ConsGeral />
         </Route>
 
 
