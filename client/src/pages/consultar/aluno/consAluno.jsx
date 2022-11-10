@@ -86,6 +86,12 @@ export default function ConsAluno () {
                         <input type="text" name="sala" placeholder="Sala" onChange={handleChangeValues} defaultValue={sala}/>
                         <input type="text" name="modulo" placeholder="Modulo" onChange={handleChangeValues} defaultValue={modulo}/>
 
+                        <select name="modulo" id="modulo">
+                            <option value="1">Modulo 1</option>
+                            <option value="2">Modulo 2</option>
+                            <option value="3">Modulo 3</option>
+                        </select>
+
                         <div id="acbut">
                             <button onClick={() => clickButton()}>ATUALIZAR</button>
                             <button onClick={() => clickButtonDel()}>DELETAR</button>

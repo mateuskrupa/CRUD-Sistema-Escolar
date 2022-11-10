@@ -4,6 +4,7 @@ const db = require('./banco')
 const cors = require('cors')
 
 var lcpf = []
+var laluno = []
 
 app.use(cors())
 app.use(express.json())
@@ -33,9 +34,8 @@ app.post("/cadastrar/aluno", (req, res) => {
     const {nome} = req.body;
     const {cpf} = req.body;
     const {sala} = req.body;
-    const {modulo} = req.body;
 
-    let sql = `INSERT INTO aluno (nome, cpf, sala, modulo) VALUES ('${nome}', '${cpf}', '${sala}', '${modulo}')`
+    let sql = `INSERT INTO aluno (nome, cpf, sala, modulo) VALUES ('${nome}', '${cpf}', '${sala}', 'Modulo 1')`
 
 
     db.query(sql, (err) => {
@@ -45,14 +45,23 @@ app.post("/cadastrar/aluno", (req, res) => {
     })
 })
 
+
 //CADASTRAR NOVO BOLETIM
+let aprov = ''
 app.post("/cadastrar/boletim", (req, res) => {
-    const {aluno} = req.body;
     const {turma} = req.body;
     const {nota_final} = req.body;
+    const {aluno} = req.body;
 
-    let sql = `INSERT INTO boletim (aluno, turma, nota_final) VALUES ('${aluno}', '${turma}', '${nota_final}')`
+    const nota = parseInt(nota_final)
 
+    if (nota >= 6) {
+        aprov = 'Aprovado'
+    }else{
+        aprov = 'Reprovado'
+    }
+
+    let sql = `INSERT INTO boletim (aluno, turma, nota_final, aprovacao) VALUES ('${aluno}', '${turma}', '${nota_final}', '${aprov}')`
 
     db.query(sql, (err) => {
         if (err) return res.json(err);
@@ -116,6 +125,38 @@ app.get("/consultar/aluno", (req, res) => {
     const cpf = lcpf[0]
 
     let sql = `SELECT * FROM aluno WHERE cpf='${cpf}'`
+
+    console.log(sql)
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+
+    
+})
+
+//CONSULTAR BOLETIM
+app.post("/consultar/boletim", (req, res) => {
+    let {aluno} = req.body;
+
+    if(laluno.length >= 1) {
+        laluno.pop()
+        laluno.push(aluno)
+        console.log(laluno[0])
+    }else{
+        laluno.push(aluno) 
+        console.log(laluno[0])
+    }   
+
+})
+
+app.get("/consultar/boletim", (req, res) => {
+
+    const idaluno = laluno[0]
+
+    let sql = `SELECT * FROM boletim WHERE aluno='${idaluno}'`
 
     console.log(sql)
 
@@ -229,6 +270,45 @@ app.post("/atualizar/aluno", (req, res) => {
     })
 })
 
+let aprovb = 0
+//ATUALIZAR BOLETIM
+app.post("/atualizar/boletim", (req, res) => {
+    let {turma} = req.body;
+    let {nota_final} = req.body;
+    const nota = parseInt(nota_final)
+
+    if (turma === undefined) {
+        turma = ''
+        console.log(turma)
+    }else{
+        turma = `turma='${turma}',`
+    }
+
+    if (nota_final === undefined) {
+        nota_final = ''
+        console.log(nota_final)
+    }else{
+        nota_final = `nota_final='${nota_final}',`
+    }
+
+    if (nota >= 6) {
+        aprovb = 'Aprovado'
+    }else{
+        aprovb = 'Reprovado'
+    }
+
+    console.log(aprovb)
+    console.log(typeof(nota))
+    let sql = `UPDATE boletim SET ${turma} ${nota_final} aprovacao='${aprovb}' WHERE aluno='${laluno[0]}'`
+
+    console.log(sql)
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
 
 //DELETAR PROFESSOR
 app.post("/deletar/professor", (req, res) => {
@@ -249,6 +329,20 @@ app.post("/deletar/aluno", (req, res) => {
     const {cpf} = req.body;
 
     let sql = `DELETE FROM aluno WHERE cpf='${cpf}'`
+
+    console.log(sql)
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
+//DELETAR BOLETIM
+app.post("/deletar/boletim", (req, res) => {
+    const {aluno} = req.body;
+
+    let sql = `DELETE FROM boletim WHERE aluno='${aluno}'`
 
     console.log(sql)
     db.query(sql, (err) => {

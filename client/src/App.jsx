@@ -10,6 +10,7 @@ import Aluno from './pages/cadastrar/aluno/cad_aluno'
 import Boletim from './pages/cadastrar/boletim/cad_boletim'
 import ConsAluno from './pages/consultar/aluno/consAluno'
 import ConsProf from './pages/consultar/professor/consProf'
+import ConsBoletim from './pages/consultar/boletim/consBoletim'
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
         </div>
         
         <a id="a" href="/cadastrar">CADASTRAR</a>
-        <a id="a" href="/consultar">CONSULTAR / ATUALIZAR</a>
+        <a id="a" href="/consultar">CONSULTAR / ATUALIZAR / DELETAR</a>
       </div>
 
       <Switch>
@@ -61,6 +62,10 @@ function App() {
 
         <Route exact path="/consultar/aluno">
           <ConsAluno />
+        </Route>
+
+        <Route exact path="/consultar/boletim">
+          <ConsBoletim />
         </Route>
 
 
