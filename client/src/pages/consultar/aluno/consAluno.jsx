@@ -67,6 +67,11 @@ export default function ConsAluno () {
             cpf: values.cpf
         }).then((response) => {
             console.log(response)
+            setNome()
+            setCpf()
+            setSala()
+            setModulo()
+            setMatricula()
         })
     }
 

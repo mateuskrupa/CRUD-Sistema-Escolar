@@ -69,6 +69,11 @@ export default function ConsTurma () {
             id_turma: values.id_turma
         }).then((response) => {
             console.log(response)
+            setId_turma()
+            setProfessor()
+            setDisciplina()
+            setSala()
+            setListAlunos()
         })
     }
 

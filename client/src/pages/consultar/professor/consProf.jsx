@@ -66,6 +66,10 @@ export default function ConsProf () {
             cpf: values.cpf
         }).then((response) => {
             console.log(response)
+            setNome()
+            setCpf()
+            setTa()
+            setDisciplina()
         })
     }
 

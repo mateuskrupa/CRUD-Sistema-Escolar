@@ -87,6 +87,12 @@ export default function ConsBoletim () {
             aluno: id_aluno
         }).then((response) => {
             console.log(response)
+            setId_Aluno()
+            setNomeAluno()
+            setNota_final()
+            setSituacao()
+            setTurma()
+            setNota_final()
         })
     }
 
