@@ -29,6 +29,12 @@ export default function ConsGeral () {
         })
     }
 
+    const clickTurma = () => {
+        Axios.get("http://localhost:8080/consultar/geral/turma").then((response) => {
+            setListTurma(response.data.rows)           
+        })
+    }
+
     const limpar = () => {
         setListProf()
         setListAluno()
@@ -44,7 +50,7 @@ export default function ConsGeral () {
         <button onClick={()=>{clickProf()}}>Professores</button>
         <button onClick={()=>{clickAluno()}}>Alunos</button>
         <button onClick={()=>{clickBoletim()}}>Boletins</button>
-        <button>Turmas</button>
+        <button onClick={()=>{clickTurma()}}>Turmas</button>
         <button onClick={()=>{limpar()}}>Limpar Dados</button>
         </div>
 
@@ -58,6 +64,10 @@ export default function ConsGeral () {
 
         {typeof listBoletim !== "undefined" && listBoletim.map((value) => {
             return <ShowTable one={value.aluno} two={value.turma} three={value.nota_final} four={value.aprovacao}/>
+        })}
+
+        {typeof listTurma !== "undefined" && listTurma.map((value) => {
+            return <ShowTable one={value.id_turma} two={value.professor} three={value.disciplina} four={value.sala} five={value.aluno}/>
         })}
 
         

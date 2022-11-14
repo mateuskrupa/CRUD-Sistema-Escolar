@@ -1,0 +1,6 @@
+#cons-turma-container {
+    display: grid;
+    grid-template-columns: auto 20% auto auto;
+    justify-content: center;
+    margin-top: 20px;
+}

@@ -5,6 +5,7 @@ const cors = require('cors')
 
 var lcpf = []
 var laluno = []
+var lturma = []
 
 app.use(cors())
 app.use(express.json())
@@ -63,6 +64,24 @@ app.post("/cadastrar/boletim", (req, res) => {
 
     let sql = `INSERT INTO boletim (aluno, turma, nota_final, aprovacao) VALUES ('${aluno}', '${turma}', '${nota_final}', '${aprov}')`
 
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
+//CADASTRAR NOVA TURMA
+app.post("/cadastrar/turma", (req, res) => {
+    const {id_turma} = req.body; 
+    const {professor} = req.body;
+    const {disciplina} = req.body;
+    const {sala} = req.body;
+    const {aluno} = req.body;
+
+    let sql = `INSERT INTO turma (id_turma, professor, disciplina, sala, conjunto_alunos, aluno) VALUES ('${id_turma}', '${professor}', '${disciplina}', '${sala}', '${id_turma}', '${aluno}')`
+
+    console.log(sql)
     db.query(sql, (err) => {
         if (err) return res.json(err);
 
@@ -159,6 +178,56 @@ app.get("/consultar/boletim", (req, res) => {
     let sql = `SELECT * FROM boletim WHERE aluno='${idaluno}'`
 
     console.log(sql)
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+
+    
+})
+
+//CONSULTAR TURMA
+app.post("/consultar/turma", (req, res) => {
+    let {id_turma} = req.body;
+    console.log(id_turma)
+
+    if(lturma.length >= 1) {
+        lturma.pop()
+        lturma.push(id_turma)
+        console.log(lturma)
+    }else{
+        lturma.push(id_turma)
+        console.log(lturma)  
+    }   
+
+})
+
+app.get("/consultar/turma", (req, res) => {
+
+    const id_turma = lturma[0]
+
+    let sql = `SELECT * FROM turma WHERE id_turma='${id_turma}'`
+
+
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+
+    
+})
+
+app.get("/consultar/alunos", (req, res) => {
+
+    const id_turma = lturma[0]
+
+    let sql = `SELECT aluno FROM turma WHERE id_turma='${id_turma}'`
+
+
 
     db.query(sql, (err, data) => {
         if (err) return res.json(err);
@@ -309,6 +378,44 @@ app.post("/atualizar/boletim", (req, res) => {
     })
 })
 
+//ATUALIZAR TURMA
+app.post("/atualizar/turma", (req, res) => {
+    let {professor} = req.body;
+    let {disciplina} = req.body;
+    let {sala} = req.body;
+
+    if (professor === undefined) {
+        professor = ''
+        console.log(professor)
+    }else{
+        professor = `professor='${professor}',`
+    }
+
+    if (disciplina === undefined) {
+        disciplina = ''
+        console.log(disciplina)
+    }else{
+        disciplina = `disciplina='${disciplina}',`
+    }
+
+    if (sala === undefined) {
+        sala = ''
+
+    }else{
+        sala = `sala='${sala}',`
+    }
+
+
+    let sql = `UPDATE turma SET ${professor} ${disciplina} ${sala} id_turma=${lturma[0]} WHERE id_turma='${lturma[0]}'`
+
+    console.log(sql)
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
 
 //DELETAR PROFESSOR
 app.post("/deletar/professor", (req, res) => {
@@ -352,6 +459,20 @@ app.post("/deletar/boletim", (req, res) => {
     })
 })
 
+//DELETAR TURMA
+app.post("/deletar/turma", (req, res) => {
+    const {id_turma} = req.body;
+
+    let sql = `DELETE FROM turma WHERE id_turma='${id_turma}'`
+
+    console.log(sql)
+    db.query(sql, (err) => {
+        if (err) return res.json(err);
+
+        return res.status(200).json("criado com sucesso")
+    })
+})
+
 //CONSULTAR PROFESSOR GERAL
 app.get("/consultar/geral/professor", (req, res) => {
 
@@ -382,6 +503,19 @@ app.get("/consultar/geral/aluno", (req, res) => {
 app.get("/consultar/geral/boletim", (req, res) => {
 
     const sql = `SELECT * FROM boletim`
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+   
+})
+
+//CONSULTAR TURMA GERAL
+app.get("/consultar/geral/turma", (req, res) => {
+
+    const sql = `SELECT * FROM turma`
 
     db.query(sql, (err, data) => {
         if (err) return res.json(err);

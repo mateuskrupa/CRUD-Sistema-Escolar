@@ -8,9 +8,11 @@ import Logo from './logo.png'
 import Prof from './pages/cadastrar/professor/cad_prof'
 import Aluno from './pages/cadastrar/aluno/cad_aluno'
 import Boletim from './pages/cadastrar/boletim/cad_boletim'
+import Turma from './pages/cadastrar/turma/cad_turma'
 import ConsAluno from './pages/consultar/aluno/consAluno'
 import ConsProf from './pages/consultar/professor/consProf'
 import ConsBoletim from './pages/consultar/boletim/consBoletim'
+import ConsTurma from './pages/consultar/turma/consTurma'
 import ConsGeral from './pages/consultar/geral/consGeral'
 
 
@@ -57,6 +59,10 @@ function App() {
           <Boletim />
         </Route>
 
+        <Route exact path="/cadastrar/turma">
+          <Turma />
+        </Route>
+
         <Route exact path="/consultar/professor">
           <ConsProf />
         </Route>
@@ -67,6 +73,10 @@ function App() {
 
         <Route exact path="/consultar/boletim">
           <ConsBoletim />
+        </Route>
+
+        <Route exact path="/consultar/turma">
+          <ConsTurma />
         </Route>
 
         <Route exact path="/consultar/geral">
