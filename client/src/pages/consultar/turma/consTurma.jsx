@@ -29,6 +29,7 @@ export default function ConsTurma () {
             sala: values.sala,
         }).then((response) => {
             console.log(response)
+            alert("Atualizado com sucesso!")
         })
     }
 
@@ -74,6 +75,7 @@ export default function ConsTurma () {
             setDisciplina()
             setSala()
             setListAlunos()
+            alert("Deletado com sucesso!")
         })
     }
 

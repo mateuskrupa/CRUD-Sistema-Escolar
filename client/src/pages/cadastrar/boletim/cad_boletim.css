@@ -1,0 +1,5 @@
+#cad-boletim-container {
+    display: grid;
+    grid-template-columns: auto 20% auto;
+    justify-content: center;
+}

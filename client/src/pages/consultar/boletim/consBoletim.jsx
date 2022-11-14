@@ -26,6 +26,7 @@ export default function ConsBoletim () {
             nota_final: values.nota_final,
         }).then((response) => {
             console.log(response)
+            alert("Atualizado com sucesso!")
         })
     }
 
@@ -93,6 +94,7 @@ export default function ConsBoletim () {
             setSituacao()
             setTurma()
             setNota_final()
+            alert("Deletado com sucesso!")
         })
     }
 
@@ -102,7 +104,7 @@ export default function ConsBoletim () {
                     <div id="cpf">
                         <input type="text" name="cpf" placeholder="Cpf" onChange={(handleChangeValues)} />
                         <button id="cons" onClick={() => Consultar()}>Consultar</button>
-                        <button id="cons" onClick={() => ConsultarB()}>trazer boletim</button>
+                        <button id="cons" onClick={() => ConsultarB()}>Trazer Boletim</button>
                     </div>
 
                     <Show idAluno={id_aluno} nome={nomeAluno} turma={turma} nf={nota_final} situacao={situacao}/>

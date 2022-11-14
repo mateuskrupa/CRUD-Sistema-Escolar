@@ -21,6 +21,7 @@ export default function Turma () {
             aluno: values.aluno,
         }).then((response) => {
             console.log(response)
+            alert("Cadastrado com sucesso!")
         })
     }
 

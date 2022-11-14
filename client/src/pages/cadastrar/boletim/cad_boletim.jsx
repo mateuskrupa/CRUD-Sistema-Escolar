@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import Axios from 'axios'
+import './cad_boletim.css'
+import Show from './show'
 
 export default function Boletim () {
 
@@ -23,6 +25,7 @@ export default function Boletim () {
             nota_final: values.nota_final,
         }).then((response) => {
             console.log(response)
+            alert("Cadastrado com sucesso!")
         })
     }
 
@@ -53,13 +56,13 @@ export default function Boletim () {
     }
 
     return(
-        <div id="cad-prof-container">
+        <div id="cad-boletim-container">
                     <div id="cpf">
                         <input type="text" name="cpf" placeholder="Cpf Aluno" onChange={(handleChangeValues)} />
-                        <button id="cons" onClick={() => Consultar()}>Consultar</button>
-                        <h1>{nome}</h1>
-                        <h1>{matricula}</h1>
+                        <button id="cons" onClick={() => Consultar()}>Consultar</button>                
                     </div>
+
+                    <Show nome={nome} id={matricula}></Show>
 
                 <div id="cad-form">
                     <input type="text" name="turma" placeholder="Turma" onChange={handleChangeValues}/>

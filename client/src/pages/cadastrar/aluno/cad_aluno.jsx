@@ -19,6 +19,7 @@ export default function Aluno () {
             sala: values.sala,
         }).then((response) => {
             console.log(response)
+            alert("Cadastrado com sucesso!")
         })
     }
 
@@ -30,7 +31,7 @@ export default function Aluno () {
                     <input type="text" name="cpf" placeholder="Cpf" onChange={handleChangeValues}/>
                     <input type="text" name="sala" placeholder="Sala" onChange={handleChangeValues}/>
 
-                    <button onClick={() => clickButton()}>Submit</button>
+                    <button onClick={() => clickButton()}>CADASTRAR</button>
                 </div>
             
         </div>

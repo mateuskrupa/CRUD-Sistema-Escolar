@@ -27,6 +27,7 @@ export default function ConsAluno () {
             modulo: values.modulo,
         }).then((response) => {
             console.log(response)
+            alert("Atualizado com sucesso!")
         })
     }
 
@@ -72,6 +73,7 @@ export default function ConsAluno () {
             setSala()
             setModulo()
             setMatricula()
+            alert("Deletado com sucesso!")
         })
     }
 

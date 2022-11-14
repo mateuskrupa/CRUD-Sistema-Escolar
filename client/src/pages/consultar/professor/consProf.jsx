@@ -27,6 +27,7 @@ export default function ConsProf () {
             disciplina: values.disciplina,
         }).then((response) => {
             console.log(response)
+            alert("Atualizado com sucesso!")
         })
     }
 
@@ -70,6 +71,7 @@ export default function ConsProf () {
             setCpf()
             setTa()
             setDisciplina()
+            alert("Deletado com sucesso!")
         })
     }
 

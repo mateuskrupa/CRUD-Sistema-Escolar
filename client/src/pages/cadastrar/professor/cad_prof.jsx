@@ -21,6 +21,7 @@ export default function Prof () {
             disciplina: values.disciplina,
         }).then((response) => {
             console.log(response)
+            alert("Cadastrado com sucesso!")
         })
     }
 
