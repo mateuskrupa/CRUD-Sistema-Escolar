@@ -34,9 +34,8 @@ app.post("/cadastrar/professor", (req, res) => {
 app.post("/cadastrar/aluno", (req, res) => {
     const {nome} = req.body;
     const {cpf} = req.body;
-    const {sala} = req.body;
 
-    let sql = `INSERT INTO aluno (nome, cpf, sala, modulo) VALUES ('${nome}', '${cpf}', '${sala}', 'Modulo 1')`
+    let sql = `INSERT INTO aluno (nome, cpf, sala) VALUES ('${nome}', '${cpf}', 'Modulo 1')`
 
 
     db.query(sql, (err) => {

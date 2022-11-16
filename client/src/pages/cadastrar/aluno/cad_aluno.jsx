@@ -16,7 +16,6 @@ export default function Aluno () {
         Axios.post("http://localhost:8080/cadastrar/aluno", {
             nome: values.nome,
             cpf: values.cpf,
-            sala: values.sala,
         }).then((response) => {
             console.log(response)
             alert("Cadastrado com sucesso!")
@@ -29,7 +28,6 @@ export default function Aluno () {
                 <div id="cad-form">
                     <input type="text" name="nome" placeholder="Nome" onChange={handleChangeValues}/>
                     <input type="text" name="cpf" placeholder="Cpf" onChange={handleChangeValues}/>
-                    <input type="text" name="sala" placeholder="Sala" onChange={handleChangeValues}/>
 
                     <button onClick={() => clickButton()}>CADASTRAR</button>
                 </div>

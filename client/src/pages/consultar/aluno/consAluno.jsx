@@ -9,7 +9,6 @@ export default function ConsAluno () {
     const [nome, setNome] = useState()
     const [cpf, setCpf] = useState()
     const [sala, setSala] = useState()
-    const [modulo, setModulo] = useState()
 
     const handleChangeValues = (value) => {
         setValues((prevValue) => ({
@@ -24,7 +23,6 @@ export default function ConsAluno () {
             nome: values.nome,
             cpf: values.cpf,
             sala: values.sala,
-            modulo: values.modulo,
         }).then((response) => {
             console.log(response)
             alert("Atualizado com sucesso!")
@@ -57,7 +55,6 @@ export default function ConsAluno () {
             setNome(response.data.rows[0].nome)
             setCpf(response.data.rows[0].cpf)
             setSala(response.data.rows[0].sala)
-            setModulo(response.data.rows[0].modulo)
             
         })
     }
@@ -71,7 +68,6 @@ export default function ConsAluno () {
             setNome()
             setCpf()
             setSala()
-            setModulo()
             setMatricula()
             alert("Deletado com sucesso!")
         })
@@ -85,13 +81,12 @@ export default function ConsAluno () {
                         <button id="cons" onClick={() => Consultar()}>Consultar</button>
                     </div>
 
-                    <ShowAluno nome={nome} cpf={cpf} sala={sala} modulo={modulo} matricula={matricula} />
+                    <ShowAluno nome={nome} cpf={cpf} sala={sala} matricula={matricula} />
 
                     <div id="form">
                         <input type="text" name="nome" placeholder="Nome" onChange={handleChangeValues} defaultValue={nome}/>
                         <input type="text" name="cpf" placeholder="CPF" onChange={handleChangeValues} defaultValue={cpf}/>
                         <input type="text" name="sala" placeholder="Sala" onChange={handleChangeValues} defaultValue={sala}/>
-                        <input type="text" name="modulo" placeholder="Modulo" onChange={handleChangeValues} defaultValue={modulo}/>
 
                         <select name="modulo" id="modulo">
                             <option value="1">Modulo 1</option>
