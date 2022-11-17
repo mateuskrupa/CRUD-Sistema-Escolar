@@ -6,6 +6,7 @@ const cors = require('cors')
 var lcpf = []
 var laluno = []
 var lturma = []
+var lmatricula = []
 
 app.use(cors())
 app.use(express.json())
@@ -237,6 +238,38 @@ app.get("/consultar/alunos", (req, res) => {
     
 })
 
+//CONSULTAR APROVAÇÃO
+app.post("/enviar/matricula", (req, res) => {
+    let {matricula} = req.body;
+    console.log(matricula)
+
+    if(lmatricula.length >= 1) {
+        lmatricula.pop()
+        lmatricula.push(matricula)
+        console.log(lmatricula)
+    }else{
+        lmatricula.push(matricula)
+        console.log(lmatricula)  
+    }
+})
+
+app.get("/consultar/aprovacao", (req, res) => {
+
+    const id_matricula = lmatricula[0]
+
+    let sql = `select boletim.aprovacao from aluno inner join boletim on boletim.aluno = aluno.numero_matricula where aluno.numero_matricula=${id_matricula}`
+
+    console.log(sql)
+
+    db.query(sql, (err, data) => {
+        if (err) return res.json(err);
+    
+        return res.status(200).json(data);
+      });
+
+    
+})
+
 
 //ATUALIZAR PROFESSOR
 app.post("/atualizar/professor", (req, res) => {
@@ -297,7 +330,7 @@ app.post("/atualizar/aluno", (req, res) => {
     let {nome} = req.body;
     let {cpf} = req.body;
     let {sala} = req.body;
-    let {modulo} = req.body;
+    console.log(sala)
 
     if (nome === undefined) {
         nome = ''
@@ -310,7 +343,7 @@ app.post("/atualizar/aluno", (req, res) => {
         cpf = ''
         console.log(cpf)
     }else{
-        cpf = `cpf='${cpf}',`
+        cpf = `cpf='${cpf}'`
     }
 
     if (sala === undefined) {
@@ -320,15 +353,7 @@ app.post("/atualizar/aluno", (req, res) => {
         sala = `sala='${sala}',`
     }
 
-    if (modulo === undefined) {
-        modulo = ''
-    }else{
-        modulo = `modulo='${modulo}',`
-    }
-
-
-
-    let sql = `UPDATE aluno SET ${nome} ${cpf} ${sala} ${modulo} tipo='aluno' WHERE cpf='${lcpf[0]}'`
+    let sql = `UPDATE aluno SET ${nome} ${sala} ${cpf} WHERE cpf='${lcpf[0]}'`
 
     console.log(sql)
     db.query(sql, (err) => {

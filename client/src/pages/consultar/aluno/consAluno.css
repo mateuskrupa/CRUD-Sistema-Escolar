@@ -1,0 +1,11 @@
+#modulos {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#m {
+    font-size: 20px;
+    padding: 5px;
+}
+

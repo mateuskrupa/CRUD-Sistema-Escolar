@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Axios from 'axios'
 import ShowAluno from './show'
+import './consAluno.css'
 
 export default function ConsAluno () {
 
@@ -9,6 +10,7 @@ export default function ConsAluno () {
     const [nome, setNome] = useState()
     const [cpf, setCpf] = useState()
     const [sala, setSala] = useState()
+    const [aprov, setAprov] = useState('')
 
     const handleChangeValues = (value) => {
         setValues((prevValue) => ({
@@ -18,14 +20,15 @@ export default function ConsAluno () {
     }
 
 
-    const clickButton = () => {
+    const clickButton = () => {        
         Axios.post("http://localhost:8080/atualizar/aluno", {
             nome: values.nome,
             cpf: values.cpf,
-            sala: values.sala,
+            sala: values.sala
         }).then((response) => {
             console.log(response)
-            alert("Atualizado com sucesso!")
+            alert("Atualizado com sucesso!")  
+            
         })
     }
 
@@ -73,12 +76,36 @@ export default function ConsAluno () {
         })
     }
 
+    const verificarAprov = () => {
+        enviarMatricula()
+        setTimeout(() => {
+            ConsultarAprovacao()
+        }, 1000);
+    }
+
+    const ConsultarAprovacao = () => {
+        Axios.get("http://localhost:8080/consultar/aprovacao").then((response) => {
+            console.log(response.data.rows)
+            setAprov(response.data.rows[0].aprovacao) 
+            console.log(aprov)           
+        })
+    }
+
+    const enviarMatricula = () => {
+        Axios.post("http://localhost:8080/enviar/matricula", {
+            matricula: matricula
+        }).then((response) => {
+            console.log(response)
+        })
+    }
+
 
     return(
         <div id="cons-prof-container">
                     <div id="cpf">
                         <input type="text" name="cpf" placeholder="Cpf" onChange={(handleChangeValues)} />
                         <button id="cons" onClick={() => Consultar()}>Consultar</button>
+                        <button id="cons" onClick={() => verificarAprov()}>Consultar Aprovação</button>
                     </div>
 
                     <ShowAluno nome={nome} cpf={cpf} sala={sala} matricula={matricula} />
@@ -88,11 +115,19 @@ export default function ConsAluno () {
                         <input type="text" name="cpf" placeholder="CPF" onChange={handleChangeValues} defaultValue={cpf}/>
                         <input type="text" name="sala" placeholder="Sala" onChange={handleChangeValues} defaultValue={sala}/>
 
-                        <select name="modulo" id="modulo">
-                            <option value="1">Modulo 1</option>
-                            <option value="2">Modulo 2</option>
-                            <option value="3">Modulo 3</option>
-                        </select>
+                        <div id="modulos">
+                        <p id="m">Modulo 2: </p>
+                        {aprov === '' && 
+                        <p id="m">Consulte Aprovação</p>
+                        }
+                        {aprov === "Reprovado" && 
+                        <p id="m">Indisponivel</p>
+                        }
+                        {aprov === "Aprovado" && 
+                        <p id="m">Disponivel</p>
+                        }
+                        </div>
+
 
                         <div id="acbut">
                             <button onClick={() => clickButton()}>ATUALIZAR</button>
